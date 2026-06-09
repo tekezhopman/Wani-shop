@@ -4,81 +4,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>የምርቶች ዝርዝር እና ክፍያ</title>
+    <title>AliExpress - የኢትዮጵያ ገበያ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background-color: #f4f4f9; padding: 15px; margin: 0; }
-        h2 { text-align: center; color: #1a1a2e; margin-bottom: 20px; }
-        .product-list { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: auto; }
-        .product-card { background: white; border-radius: 10px; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px; }
-        .product-img { width: 80px; height: 80px; background: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: #666; text-align: center; }
-        .product-info { flex-grow: 1; }
-        .product-name { font-size: 16px; font-weight: bold; color: #333; }
-        .product-price { color: #e94560; font-weight: bold; margin-top: 5px; }
-        .btn-select { background-color: #1a1a2e; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: bold; }
-        .btn-select:hover { background-color: #e94560; }
-        
-        /* የክፍያ አማራጭ ሳጥን */
-        .payment-box { display: none; background: white; max-width: 400px; margin: 20px auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; }
-        .payment-options { display: flex; justify-content: space-around; margin-top: 15px; }
-        .pay-btn { padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; color: white; width: 45%; }
-        .cbe-btn { background-color: #7b1fa2; } /* የሲቢኢ ብር የሐምራዊ ቀለም መለያ */
-        .tele-btn { background-color: #0088cc; } /* የቴሌብር ሰማያዊ ቀለም መለያ */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f7; margin: 0; padding: 0; padding-bottom: 70px; }
+        header { background-color: #ff4747; color: white; padding: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header-container { display: flex; align-items: center; justify-content: space-between; max-width: 500px; margin: auto; }
+        .logo { font-size: 20px; font-weight: bold; letter-spacing: 1px; }
+        .cart-icon { position: relative; font-size: 20px; cursor: pointer; }
+        #cart-count { position: absolute; top: -8px; right: -10px; background: white; color: #ff4747; border-radius: 50%; padding: 2px 6px; font-size: 11px; font-weight: bold; }
+        .search-container { max-width: 460px; margin: 10px auto; padding: 0 15px; }
+        .search-box { display: flex; background: white; border-radius: 25px; overflow: hidden; border: 2px solid #ff4747; }
+        .search-box input { border: none; padding: 10px 15px; flex-grow: 1; outline: none; font-size: 14px; }
+        .search-box button { background: #ff4747; border: none; color: white; padding: 0 20px; cursor: pointer; }
+        .main-container { max-width: 500px; margin: auto; padding: 10px; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; transition: 0.3s; }
+        .product-card:hover { transform: translateY(-3px); }
+        .product-img-box { background: #eaeaea; height: 140px; display: flex; align-items: center; justify-content: center; font-size: 50px; position: relative; }
+        .tag { position: absolute; top: 8px; left: 8px; background: #ff4747; color: white; font-size: 10px; padding: 3px 6px; border-radius: 3px; font-weight: bold; }
+        .product-details { padding: 10px; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-title { font-size: 14px; font-weight: 500; color: #333; height: 38px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .rating { color: #ffbc00; font-size: 11px; margin: 5px 0; }
+        .rating span { color: #888; margin-left: 5px; }
+        .price-row { display: flex; align-items: baseline; gap: 5px; margin-top: auto; }
+        .current-price { color: #ff4747; font-size: 16px; font-weight: bold; }
+        .old-price { color: #999; font-size: 12px; text-decoration: line-through; }
+        .card-actions { display: flex; gap: 5px; margin-top: 10px; }
+        .btn-card { flex: 1; padding: 8px; border: none; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; text-align: center; text-decoration: none; }
+        .btn-add { background: #fff1f1; color: #ff4747; border: 1px solid #ff4747; }
+        .btn-buy { background: linear-gradient(135deg, #ff7300, #ff4747); color: white; }
+        .reviews-section { background: white; border-radius: 12px; padding: 15px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.04); }
+        .reviews-section h3 { margin-top: 0; font-size: 16px; color: #333; border-bottom: 2px solid #f4f4f7; padding-bottom: 8px; }
+        .comment-form input, .comment-form textarea { width: 95%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none; font-family: inherit; }
+        .comment-form button { background: #333; color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        .comments-display { margin-top: 15px; max-height: 200px; overflow-y: auto; }
+        .user-comment { background: #f8f8fa; padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
+        .user-comment strong { color: #ff4747; }
+        .floating-call { position: fixed; bottom: 20px; right: 20px; background: #2e7d32; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; text-decoration: none; }
     </style>
 </head>
 <body>
 
-<h2>የሱቃችን ምርቶች</h2>
-
-<div class="product-list">
-    <!-- ምርት 1 -->
-    <div class="product-card">
-        <div class="product-img">ጫማ ምስል</div>
-        <div class="product-info">
-            <div class="product-name">የወንዶች ጫማ</div>
-            <div class="product-price">3,500 ብር</div>
+<header>
+    <div class="header-container">
+        <div class="logo"><i class="fa-solid fa-bag-shopping"></i> AliExp-ET</div>
+        <div class="cart-icon" onclick="viewCart()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cart-count">0</span>
         </div>
-        <button class="btn-select" onclick="chooseProduct('የወንዶች ጫማ', '3,500')">ግዛ</button>
     </div>
+</header>
 
-    <!-- ምርት 2 -->
-    <div class="product-card">
-        <div class="product-img">ስልክ ምስል</div>
-        <div class="product-info">
-            <div class="product-name">ዘመናዊ ስልክ</div>
-            <div class="product-price">25,000 ብር</div>
-        </div>
-        <button class="btn-select" onclick="chooseProduct('ዘመናዊ ስልክ', '25,000')">ግዛ</button>
+<div class="search-container">
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="ጫማ፣ ስልክ፣ አልባሳት ይፈልጉ..." onkeyup="filterProducts()">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 </div>
 
-<!-- የመክፈያ አማራጭ ማሳያ ፎርም -->
-<div id="payBox" class="payment-box">
-    <h3 id="selectedProduct" style="color: #333;"></h3>
-    <p>እባክዎ መክፈያ ዘዴ ይምረጡ፦</p>
-    <div class="payment-options">
-        <button class="pay-btn cbe-btn" onclick="processPayment('CBE Birr')">CBE Birr (ሲቢኢ ብር)</button>
-        <button class="pay-btn tele-btn" onclick="processPayment('telebirr')">telebirr (ቴሌብር)</button>
+<div class="main-container">
+    <div class="product-grid" id="products-wrapper">
+        
+        <!-- ምርት 1 -->
+        <div class="product-card" data-name="የወንዶች ስፖርት ጫማ">
+            <div class="product-img-box">
+                👟
+                <span class="tag">ተፈላጊ</span>
+            </div>
+            <div class="product-details">
+                <div class="product-title">የወንዶች ዘመናዊ ስፖርት ጫማ - Premium Sneakers</div>
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><span>(48)</span></div>
+                <div class="price-row">
+                    <span class="current-price">3,500 ብር</span>
+                    <span class="old-price">4,200 ብር</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-card btn-add" onclick="addToCart('የወንዶች ስፖርት ጫማ')">ቅርጫት</button>
+                    <a href="https://t.me/Telegram_Username?text=ሰላም%20የወንዶች%20ስፖርት%20ጫማ%20መግዛት%20ፈልጌ%20ነበር" target="_blank" class="btn-card btn-buy">እዘዝ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ምርት 2 -->
+        <div class="product-card" data-name="የሴቶች ሂል ጫማ">
+            <div class="product-img-box">
+                👠
+                <span class="tag">-20%</span>
+            </div>
+            <div class="product-details">
+                <div class="product-title">የሴቶች ውብ የፓርቲ ተረከዝ ጫማ - Luxury Heels</div>
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><span>(12)</span></div>
+                <div class="price-row">
+                    <span class="current-price">2,800 ብር</span>
+                    <span class="old-price">3,500 ብር</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-card btn-add" onclick="addToCart('የሴቶች ሂል ጫማ')">ቅርጫት</button>
+                    <a href="https://t.me/Tekezhopeman?text=ሰላም%20የሴቶች%20ሂል%20ጫማ%20መግዛት%20ፈልጌ%20ነበር" target="_blank" class="btn-card btn-buy">እዘዝ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ምርት 3 -->
+        <div class="product-card" data-name="ዘመናዊ ስማርት ስልክ">
+            <div class="product-img-box">
+                📱
+                <span class="tag">አዲስ</span>
+            </div>
+            <div class="product-details">
+                <div class="product-title">አዲስ ሞዴል ስማርት ስልክ - 128GB Smartphone</div>
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><span>(104)</span></div>
+                <div class="price-row">
+                    <span class="current-price">25,000 ብር</span>
+                    <span class="old-price">28,000 ብር</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-card btn-add" onclick="addToCart('ዘመናዊ ስማርት ስልክ')">ቅርጫት</button>
+                    <a href="https://t.me/Tekezhopeman?text=ሰላም%20ዘመናዊ%20ስማርት%20ስልክ%20መግዛት%20ፈልጌ%20ነበር" target="_blank" class="btn-card btn-buy">እዘዝ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ምርት 4 -->
+        <div class="product-card" data-name="ስማርት ሰዓት">
+            <div class="product-img-box">
+                ⌚
+                <span class="tag">Hot</span>
+            </div>
+            <div class="product-details">
+                <div class="product-title">የውሃ መቋቋም የሚችል ዘመናዊ ስማርት ሰዓት - Smart Watch</div>
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><span>(67)</span></div>
+                <div class="price-row">
+                    <span class="current-price">4,200 ብር</span>
+                    <span class="old-price">5,000 ብር</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-card btn-add" onclick="addToCart('ስማርት ሰዓት')">ቅርጫት</button>
+                    <a href="https://t.me/Tekezhopeman?text=ሰላም%20ስማርት%20ሰዓት%20መግዛት%20ፈልጌ%20ነበር" target="_blank" class="btn-card btn-buy">እዘዝ</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="reviews-section">
+        <h3><i class="fa-regular fa-comments"></i> የደንበኞች አስተያየት (Reviews)</h3>
+        <div class="comment-form">
+            <input type="text" id="reviewerName" placeholder="ስምዎ...">
+            <textarea id="reviewerText" rows="2" placeholder="ስለ ዕቃዎቹ ጥራት ወይም ዋጋ አስተያየትዎን እዚህ ይጻፉ..."></textarea>
+            <button onclick="postReview()">አስተያየት ስጥ</button>
+        </div>
+        <div class="comments-display" id="commentsBox">
+            <div class="user-comment"><strong>ዮናስ ማሞ፦</strong> ጫማውን ገዝቼዋለሁ በጣም ጥራት አለው፣ ይመቻችሁ! ⭐⭐⭐⭐⭐</div>
+            <div class="user-comment"><strong>ኪያ ቶሎሳ፦</strong> ስልኩ ዋጋው ቅናሽ አለው ወይስ ማውራት ይቻላል? ⭐⭐⭐⭐</div>
+        </div>
     </div>
 </div>
+
+<a href="tel:0915678256" class="floating-call">
+    <i class="fa-solid fa-phone"></i>
+</a>
 
 <script>
-    var currentItem = "";
-    var currentPrice = "";
-
-    function chooseProduct(name, price) {
-        currentItem = name;
-        currentPrice = price;
-        
-        // ምርት ሲመረጥ የክፍያ ሳጥኑን ከታች ማሳያ
-        document.getElementById('selectedProduct').innerText = "የተመረጠው ምርት፦ " + name + " (" + price + " ብር)";
-        document.getElementById('payBox').style.display = 'block';
-        
-        // ገጹን ወደ ታች ዝቅ እንዲል ማድረግ
-        window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+    let cart = [];
+    function addToCart(productName) {
+        cart.push(productName);
+        document.getElementById('cart-count').innerText = cart.length;
+        alert("🎉 " + productName + " በተሳካ ሁኔታ ወደ ቅርጫትዎ ተጨምሯል!");
+    }
+    
+    function viewCart() {
+        if(cart.length == 0) {
+            alert("የእርስዎ የግዢ ቅርጫት ባዶ ነው!");
+        } else {
+            alert("🛒 በቅርጫትዎ ውስጥ ያሉ ዕቃዎች፦\n\n" + cart.join("\n") + "\n\nለመግዛት የዕቃዎቹን 'እዘዝ' ቁልፍ ተጭነው በቴሌግራም ያናግሩን።");
+        }
     }
 
-    function processPayment(method) {
-        alert("🎉 ጥያቄዎ ተቀባይነት አግኝቷል!\n\nበ " + method + " በኩል " + currentPrice + " ብር ለመክፈል በቀጥታ ወደ " + method + " መተግበሪያ እየተወሰዱ ነው...");
+    function filterProducts() {
+        let input = document.getElementById('search-input').value.toLowerCase();
+        let cards = document.getElementsByClassName('product-card');
+        
+        for (let i = 0; i < cards.length; i++) {
+            let name = cards[i].getAttribute('data-name').toLowerCase();
+            if (name.includes(input)) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+
+    function postReview() {
+        let name = document.getElementById('reviewerName').value;
+        let text = document.getElementById('reviewerText').value;
+        
+        if(name == "" || text == "") {
+            alert("እባክዎ ስም እና አስተያየት በትክክል ይጻፉ!");
+            return;
+        }
+        
+        let newComment = document.createElement('div');
+        newComment.className = 'user-comment';
+        newComment.innerHTML = "<strong>" + name + "፦</strong> " + text + " ⭐⭐⭐⭐⭐";
+        
+        let box = document.getElementById('commentsBox');
+        box.insertBefore(newComment, box.firstChild);
+        
+        document.getElementById('reviewerName').value = "";
+        document.getElementById('reviewerText').value = "";
     }
 </script>
 

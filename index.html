@@ -100,7 +100,7 @@
 
 <div class="search-container">
     <div class="search-box">
-        <input type="text" id="search-input" placeholder="ጫማ፣ ስልክ፣ ላፕቶፕ፣ አይፓድ ይፈልጉ..." onkeyup="filterProducts()">
+        <input type="text" id="search-input" placeholder="ጫማ፣ ስልክ፣ ላፕቶፕ፣ ሽቶ፣ ሰዓት ይፈልጉ..." onkeyup="filterProducts()">
         <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 </div>
@@ -108,6 +108,7 @@
 <div class="main-container">
     <div class="product-grid" id="products-wrapper">
         
+        <!-- 👟 ምርት 1: Nike Air Force -->
         <div class="product-card" data-name="Original Nike Air Force">
             <div class="product-img-box" onclick="zoomImage(this)">
                 <img src="https://i.ibb.co/Z1z6KvKJ/78-FEFA1-C-E49-D-4970-B85-A-2-BC6921465-C2.jpg" style="width:100%; height:100%; object-fit:cover;">
@@ -124,6 +125,7 @@
             </div>
         </div>
 
+        <!-- 💻 ምርት 2: HP Laptop -->
         <div class="product-card" data-name="HP EliteBook Laptop">
             <div class="product-img-box" onclick="zoomImage(this)">
                 <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=500&auto=format&fit=crop&q=60" style="width:100%; height:100%; object-fit:cover;">
@@ -140,6 +142,7 @@
             </div>
         </div>
 
+        <!-- 📱 ምርት 3: iPhone 14 Pro Max -->
         <div class="product-card" data-name="iPhone 14 Pro Max">
             <div class="product-img-box" onclick="zoomImage(this)">
                 <img src="https://i.ibb.co/Pvn52h8L/FF2-FD88-B-3-FEE-42-D7-B7-B5-ED154-A1-FF701.png" style="width:100%; height:100%; object-fit:cover;">
@@ -156,6 +159,7 @@
             </div>
         </div>
 
+        <!-- 📱 ምርት 4: iPhone 15 Pro Max -->
         <div class="product-card" data-name="iPhone 15 Pro Max">
             <div class="product-img-box" onclick="zoomImage(this)">
                 <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500&auto=format&fit=crop&q=60" style="width:100%; height:100%; object-fit:cover;">
@@ -172,6 +176,41 @@
             </div>
         </div>
 
+        <!-- 🌸 ምርት 5: ሉክሰሪ ብራንድ ሽቶ (አዲስ በተላከው ፎቶና ዋጋ የተተካ) -->
+        <div class="product-card" data-name="Luxury Brand Perfume ሽቶ">
+            <div class="product-img-box" onclick="zoomImage(this)">
+                <img src="https://i.ibb.co/zWBhJ5m6/BB6-E3664-4690-43-A5-8-F82-9-B8-CC8848646.jpg" style="width:100%; height:100%; object-fit:cover;">
+                <span class="tag" style="background:#e91e63;">NEW</span>
+            </div>
+            <div class="product-details">
+                <div class="product-title">Luxury Brand Perfume - የሚማርክና ለረጅም ሰዓት የሚቆይ ምርጥ ሽቶ</div>
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><span>(56)</span></div>
+                <div class="price-row"><span class="current-price">2,100 ብር</span><span class="old-price">3,200 ብር</span></div>
+                <div class="card-actions">
+                    <button class="btn-card btn-add" onclick="addToCart('Luxury Brand Perfume')">ቅርጫት</button>
+                    <button class="btn-card btn-buy" onclick="openCheckout('Luxury Brand Perfume', '2,100 ብር')">እዘዝ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ⌚ ምርት 6: ስማርት ዎች -->
+        <div class="product-card" data-name="Smart Watch ሰዓት">
+            <div class="product-img-box" onclick="zoomImage(this)">
+                <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&auto=format&fit=crop&q=60" style="width:100%; height:100%; object-fit:cover;">
+                <span class="tag" style="background:#9c27b0;">Smart</span>
+            </div>
+            <div class="product-details">
+                <div class="product-title">Ultra Smart Watch - ዘመናዊ ስማርት ሰዓት (የልብ ምትና ስፖርት መከታተያ)</div>
+                <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i><span>(72)</span></div>
+                <div class="price-row"><span class="current-price">3,000 ብር</span><span class="old-price">3,800 ብር</span></div>
+                <div class="card-actions">
+                    <button class="btn-card btn-add" onclick="addToCart('Ultra Smart Watch')">ቅርጫት</button>
+                    <button class="btn-card btn-buy" onclick="openCheckout('Ultra Smart Watch', '3,000 ብር')">እዘዝ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 👠 ምርት 7: የሴቶች ሂል ጫማ -->
         <div class="product-card" data-name="የሴቶች ሂል ጫማ">
             <div class="product-img-box" onclick="zoomImage(this)">👠<span class="tag">-20%</span></div>
             <div class="product-details">
@@ -185,6 +224,7 @@
             </div>
         </div>
 
+        <!-- 📱 ምርት 8: iPad Pro (SOLD OUT) -->
         <div class="product-card sold-out" data-name="iPad Pro M2">
             <div class="product-img-box" onclick="zoomImage(this)">
                 <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=500&auto=format&fit=crop&q=60" style="width:100%; height:100%; object-fit:cover;">
@@ -201,18 +241,19 @@
             </div>
         </div>
 
+        <!-- 🎧 ምርት 9: AirPods Max -->
         <div class="product-card" data-name="AirPods Max">
             <div class="product-img-box" onclick="zoomImage(this)">
                 <img src="https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?w=500&auto=format&fit=crop&q=60" style="width:100%; height:100%; object-fit:cover;">
-                <span class="tag">ቅናሽ</span>
+                <span class="tag">ታላቅ ቅናሽ</span>
             </div>
             <div class="product-details">
                 <div class="product-title">AirPods Max Wireless Headset - High Fidelity Sound</div>
                 <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><span>(89)</span></div>
-                <div class="price-row"><span class="current-price">42,000 ብር</span><span class="old-price">48,500 ብር</span></div>
+                <div class="price-row"><span class="current-price">2,500 ብር</span><span class="old-price">42,000 ብር</span></div>
                 <div class="card-actions">
                     <button class="btn-card btn-add" onclick="addToCart('AirPods Max')">ቅርጫት</button>
-                    <button class="btn-card btn-buy" onclick="openCheckout('AirPods Max', '42,000 ብር')">እዘዝ</button>
+                    <button class="btn-card btn-buy" onclick="openCheckout('AirPods Max', '2,500 ብር')">እዘዝ</button>
                 </div>
             </div>
         </div>

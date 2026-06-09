@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="am">
 <head>
@@ -22,8 +22,8 @@
         .main-container { max-width: 500px; margin: auto; padding: 10px; }
         .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; transition: 0.3s; }
-        .product-img-box { background: #e6f0fa; height: 140px; display: flex; align-items: center; justify-content: center; font-size: 50px; position: relative; }
-        .tag { position: absolute; top: 8px; left: 8px; background: #0056b3; color: white; font-size: 10px; padding: 3px 6px; border-radius: 3px; font-weight: bold; }
+        .product-img-box { background: #e6f0fa; height: 140px; display: flex; align-items: center; justify-content: center; font-size: 50px; position: relative; cursor: pointer; }
+        .tag { position: absolute; top: 8px; left: 8px; background: #0056b3; color: white; font-size: 10px; padding: 3px 6px; border-radius: 3px; font-weight: bold; z-index: 10; }
         
         .product-details { padding: 10px; display: flex; flex-direction: column; flex-grow: 1; }
         .product-title { font-size: 14px; font-weight: 500; color: #333; height: 38px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
@@ -38,6 +38,10 @@
         .btn-add { background: #eaf2fc; color: #004085; border: 1px solid #004085; }
         .btn-buy { background: linear-gradient(135deg, #0056b3, #004085); color: white; }
         
+        .image-zoom-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+        .zoom-img-content { max-width: 95%; max-height: 85%; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+        .close-zoom { position: absolute; top: 20px; right: 25px; color: white; font-size: 35px; font-weight: bold; cursor: pointer; user-select: none; }
+
         .checkout-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
         .modal-content { background: white; padding: 20px; border-radius: 12px; width: 85%; max-width: 360px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .modal-content h3 { margin-top: 0; color: #004085; font-size: 17px; margin-bottom: 15px; }
@@ -59,7 +63,7 @@
         .reviews-section h3 { margin-top: 0; font-size: 16px; color: #333; border-bottom: 2px solid #f4f4f7; padding-bottom: 8px; }
         .comment-form input, .comment-form textarea { width: 95%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
         .comment-form button { background: #004085; color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        .comments-display { margin-top: 15px; max-height: 200px; overflow-y: auto_ { max-height: 200px; overflow-y: auto; }
+        .comments-display { margin-top: 15px; max-height: 200px; overflow-y: auto; }
         .user-comment { background: #f8f8fa; padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 13px; }
         .user-comment strong { color: #004085; }
         
@@ -88,21 +92,24 @@
 
 <div class="main-container">
     <div class="product-grid" id="products-wrapper">
-        <div class="product-card" data-name="የወንዶች ስፖርት ጫማ">
-            <div class="product-img-box">👟<span class="tag">ተፈላጊ</span></div>
+        <div class="product-card" data-name="Original Nike Air Force">
+            <div class="product-img-box" onclick="zoomImage(this)">
+                <img src="https://i.ibb.co/Z1z6KvKJ/78-FEFA1-C-E49-D-4970-B85-A-2-BC6921465-C2.jpg" style="width:100%; height:100%; object-fit:cover;">
+                <span class="tag">ተፈላጊ</span>
+            </div>
             <div class="product-details">
-                <div class="product-title">የወንዶች ዘመናዊ ስፖርት ጫማ - Premium Sneakers</div>
+                <div class="product-title">Original Nike Air Force - ዘመናዊ የመዝናኛ ጫማ (Size 40)</div>
                 <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><span>(48)</span></div>
-                <div class="price-row"><span class="current-price">3,500 ብር</span><span class="old-price">4,200 ብር</span></div>
+                <div class="price-row"><span class="current-price">3,900 ብር</span><span class="old-price">4,500 ብር</span></div>
                 <div class="card-actions">
-                    <button class="btn-card btn-add" onclick="addToCart('የወንዶች ስፖርት ጫማ')">ቅርጫት</button>
-                    <button class="btn-card btn-buy" onclick="openCheckout('የወንዶች ስፖርት ጫማ', '3,500 ብር')">እዘዝ</button>
+                    <button class="btn-card btn-add" onclick="addToCart('Original Nike Air Force (Size 40)')">ቅርጫት</button>
+                    <button class="btn-card btn-buy" onclick="openCheckout('Original Nike Air Force (Size 40)', '3,900 ብር')">እዘዝ</button>
                 </div>
             </div>
         </div>
 
         <div class="product-card" data-name="የሴቶች ሂል ጫማ">
-            <div class="product-img-box">👠<span class="tag">-20%</span></div>
+            <div class="product-img-box" onclick="zoomImage(this)">👠<span class="tag">-20%</span></div>
             <div class="product-details">
                 <div class="product-title">የሴቶች ውብ የፓርቲ ተረከዝ ጫማ - Luxury Heels</div>
                 <div class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><span>(12)</span></div>
@@ -114,9 +121,8 @@
             </div>
         </div>
 
-        <!-- የተስተካከለው የiPhone 14 Pro Max ክፍል -->
         <div class="product-card" data-name="iPhone 14 Pro Max">
-            <div class="product-img-box">
+            <div class="product-img-box" onclick="zoomImage(this)">
                 <img src="https://i.ibb.co/Pvn52h8L/FF2-FD88-B-3-FEE-42-D7-B7-B5-ED154-A1-FF701.png" style="width:100%; height:100%; object-fit:cover;">
                 <span class="tag">አዲስ</span>
             </div>
@@ -129,6 +135,12 @@
                     <button class="btn-card btn-buy" onclick="openCheckout('iPhone 14 Pro Max', '95,000 ብር')">እዘዝ</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="zoomModal" class="image-zoom-modal">
+        <span class="close-zoom" onclick="closeZoom()">&times;</span>
+        <div id="zoomContentContainer" style="display:flex; justify-content:center; align-items:center; width:100%; height:100%;">
         </div>
     </div>
 
@@ -174,6 +186,24 @@
     let selectedPrice = "";
     let cart = [];
     let clickCount = 0;
+
+    function zoomImage(element) {
+        let modal = document.getElementById("zoomModal");
+        let container = document.getElementById("zoomContentContainer");
+        let imgElement = element.querySelector('img');
+        
+        if (imgElement) {
+            container.innerHTML = `<img src="${imgElement.src}" class="zoom-img-content">`;
+        } else {
+            let text = element.textContent.replace(element.querySelector('.tag') ? element.querySelector('.tag').textContent : '', '').trim();
+            container.innerHTML = `<div style="font-size:120px;">${text}</div>`;
+        }
+        modal.style.display = "flex";
+    }
+
+    function closeZoom() {
+        document.getElementById("zoomModal").style.display = "none";
+    }
 
     function checkAdminClick() {
         clickCount++;
@@ -251,7 +281,8 @@
             let orderBox = document.createElement('div');
             orderBox.className = 'order-item';
             orderBox.innerHTML = `
-                <p><strong>📦 ዕቃ፦</strong> ${order.product} (${order.price})</p>
+                <p><strong>📦 ዕቃ፦</strong> ${order.product}</p>
+                <p><strong>💰 ዋጋ፦</strong> ${order.price}</p>
                 <p><strong>👤 ደንበኛ፦</strong> ${order.customer}</p>
                 <p><strong>📞 ስልክ፦</strong> ${order.phone}</p>
                 <p><strong>📍 አድራሻ፦</strong> ${order.address}</p>

@@ -1,21 +1,15 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ET-Express - ኦንላይን ገበያ</title>
-    
-    <!-- 🔍 የጎግል ሰርች (SEO) ማስተካከያ ቁልፍ ቃላት -->
-    <meta name="description" content="ET-Express - በሃዋሳ እና በመላው ኢትዮጵያ የሚገኝ ዘመናዊ የኦንላይን ገበያ። ስልኮች፣ ላፕቶፖች፣ ምርጥ ሽቶዎች እና ጫማዎች በተመጣጣኝ ዋጋ።">
-    <meta name="keywords" content="ET-Express, tekezhopman, et express, et-express github, የኦንላይን ገበያ, ሃዋሳ ሱቅ, ሽቶ ዋጋ, ስልክ ገበያ, ኢትዮጵያ">
-    <meta name="author" content="tekezhopman">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- ሌላው የስታይል ክፍል እንዳለ ይቀጥላል... -->```html
+```html
 <!DOCTYPE html>
 <html lang="am">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ET-Express - ኦንላይን ገበያ</title>
+    <title>Wani Shop - ኦንላይን ገበያ</title>
+    
+    <meta name="description" content="Wani Shop (ዋኒ ሾፕ) - በሃዋሳ እና በመላው ኢትዮጵያ የሚገኝ ዘመናዊ የኦንላይን ገበያ። ስልኮች፣ ላፕቶፖች፣ ምርጥ ሽቶዎች እና ጫማዎች በተመጣጣኝ ዋጋ።">
+    <meta name="keywords" content="Wani Shop, wani-shop, ዋኒ ሾፕ, tekezhopman, wani shop github, tekezhopman.github.io/wani-shop, የኦንላይን ገበያ, ሃዋሳ ሱቅ, ሽቶ ዋጋ, ስልክ ገበያ, ኢትዮጵያ">
+    <meta name="author" content="tekezhopman">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; margin: 0; padding: 0; padding-bottom: 70px; }
@@ -101,7 +95,7 @@
 
 <header>
     <div class="header-container">
-        <div class="logo" onclick="checkAdminClick()"><i class="fa-solid fa-rocket"></i> ET-Express</div>
+        <div class="logo" onclick="checkAdminClick()"><i class="fa-solid fa-bag-shopping"></i> Wani Shop</div>
         <div class="cart-icon" onclick="viewCart()">
             <i class="fa-solid fa-cart-shopping"></i>
             <span id="cart-count">0</span>
@@ -187,7 +181,7 @@
             </div>
         </div>
 
-        <!-- 🌸 ምርት 5: ሉክሰሪ ብራንድ ሽቶ (አዲስ በተላከው ፎቶና ዋጋ የተተካ) -->
+        <!-- 🌸 ምርት 5: ሉክሰሪ ብራንድ ሽቶ -->
         <div class="product-card" data-name="Luxury Brand Perfume ሽቶ">
             <div class="product-img-box" onclick="zoomImage(this)">
                 <img src="https://i.ibb.co/zWBhJ5m6/BB6-E3664-4690-43-A5-8-F82-9-B8-CC8848646.jpg" style="width:100%; height:100%; object-fit:cover;">
@@ -271,17 +265,20 @@
 
     </div>
 
+    <!-- 🔍 የምስል ማሳያ (Zoom Modal) -->
     <div id="zoomModal" class="image-zoom-modal">
         <span class="close-zoom" onclick="closeZoom()">&times;</span>
         <div id="zoomContentContainer" style="display:flex; justify-content:center; align-items:center; width:100%; height:100%;">
         </div>
     </div>
 
+    <!-- 🛠️ የአስተዳዳሪ ክፍል (Admin Panel) -->
     <div class="admin-panel" id="adminPanel">
         <h3>🛠️ የአስተዳዳሪ ክፍል (የትዕዛዞች ዝርዝር)</h3>
-        <div id="ordersList">ትዕዛዝ አልተመዘገበም።</div>
+        <div id="ordersList">ትዕዛዝ አልተመዘገበ።</div>
     </div>
 
+    <!-- 💬 የአስተያየት መስጫ (Reviews) -->
     <div class="reviews-section">
         <h3><i class="fa-regular fa-comments"></i> የፈላጊዎች እና የደንበኞች አስተያየት (Reviews)</h3>
         <div class="comment-form">
@@ -296,6 +293,7 @@
     </div>
 </div>
 
+<!-- 🛒 የዕቃ ማዘዣ ፎርም (Checkout Modal) -->
 <div class="checkout-modal" id="checkoutModal">
     <div class="modal-content">
         <h3 id="modalProductTitle">የዕቃ ማዘዣ ፎርም</h3>
@@ -310,9 +308,10 @@
 </div>
 
 <footer>
-    <p>© 2026 ET-Express. መብቱ የተጠበቀ ነው።<br>📍 ሃዋሳ፣ ኢትዮጵያ</p>
+    <p>© 2026 Wani Shop. መብቱ የተጠበቀ ነው።<br>📍 ሃዋሳ፣ ኢትዮጵያ</p>
 </footer>
 
+<!-- 📞 የመደወያ በተን -->
 <a href="tel:0915678256" class="floating-call"><i class="fa-solid fa-phone"></i></a>
 
 <script>
@@ -320,6 +319,9 @@
     let selectedPrice = "";
     let cart = [];
     let clickCount = 0;
+    
+    // 🛠️ የአስተዳዳሪ ማስተካከያ የይለፍ ቃል
+    let adminPassword = "091557"; 
 
     function zoomImage(element) {
         let modal = document.getElementById("zoomModal");
@@ -343,7 +345,7 @@
         clickCount++;
         if (clickCount === 3) {
             let password = prompt("እባክዎ የአስተዳዳሪ የይለፍ ቃል ያስገቡ፦");
-            if (password === "1234") { 
+            if (password === adminPassword) { 
                 let panel = document.getElementById('adminPanel');
                 if (panel.style.display === "block") {
                     panel.style.display = "none";
